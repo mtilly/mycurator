@@ -9,8 +9,8 @@ function mct_ai_call_diffbot($url, $topic) {
     $dbot_url = rawurlencode($url);
     $dbot_url = diffbot_UrlEncode($dbot_url); 
     //Set up tokens
-    $dbot_token_bus = "3b695edfbba1bf45c58c6b7e949355ea";  //business plan, use main token
-    $dbot_token_ind = "8520cf51f439608495a161f05fc677f3";  //individual plan, use free token
+    $dbot_token_bus = "";  //business plan, use main token
+    $dbot_token_ind = "";  //individual plan, use free token
     $dbot_token = $token_ind ? $dbot_token_ind : $dbot_token_bus;
 
     $dbot = 'http://api.diffbot.com/v3/article?token='.$dbot_token.'&url='.$dbot_url.'&fields=html,title,date,author,resolvedPageUrl,images(*),videos(*)';
