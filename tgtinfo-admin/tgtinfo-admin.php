@@ -33,7 +33,7 @@ add_action( 'delete_user', 'tgtinfo_delete_user' );
 $Acct_token = '';
 $Acct_trial = false;
 $Acct_days = 0;
-$apikey = '6a4d5b5f740e38cb2a951789295b509b-us5';//MAILCHIMP 
+$apikey = '';//MAILCHIMP 
 //Load export users - modified plugin
 include('tgtinfo-reports.php');
 //include('tgtinfo-design.php');
