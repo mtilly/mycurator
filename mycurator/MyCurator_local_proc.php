@@ -675,7 +675,7 @@ function mct_ai_callcloud($type,$topic,$postvals){
     if (isset($postvals['getit'])) $useragent .= " GetIt";
     $ch = curl_init();
     // SET URL FOR THE POST FORM LOGIN
-    curl_setopt($ch, CURLOPT_URL, 'http://tgtinfo.net'); //'http://tgtinfo.net' or http://localhost/cloudservice/
+    curl_setopt($ch, CURLOPT_URL, 'YourURL');
     // ENABLE HTTP POST
     curl_setopt ($ch, CURLOPT_POST, 1);
     // SET POST FIELD to the content
