@@ -13,7 +13,7 @@
 error_reporting(E_ERROR);
 
 //Log timing?
-global $timing, $tm, $cache;
+global $timing, $tm, $cache, $stopwords, $threeletter;
 $timing = false;
 $tm = array();
 $tm['s'] = microtime(true);
