@@ -1,5 +1,5 @@
 # mycurator
-WordPress Plugin MyCurator code repository
+MyCurator WordPress Plugin code repository
 
 This code repository includes the MyCurator WordPress plugin code as well as the code for the Cloud Process (cloud-process subdirectory).  The tgtinfo-admin directory is a simple admin plugin that you load on your WordPress site to add API keys for users (Add Payment to add a user, Admin for changing user details) as well as a few other tools.  
 
