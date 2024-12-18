@@ -1,0 +1,88 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww15180\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 These are the tables needed for the MyCurator Cloud Server.  The first two are required for all installations:\
+\
+CREATE TABLE `wp_cs_validate` (\
+  `token` char(32) NOT NULL,\
+  `user_id` int NOT NULL,\
+  `product` char(20) NOT NULL,\
+  `end_date` date DEFAULT NULL,\
+  `classify_calls` bigint NOT NULL,\
+  `run_tot` int NOT NULL,\
+  `this_week` int NOT NULL,\
+  PRIMARY KEY  (token),\
+  KEY user_id (user_id)\
+)\
+\
+CREATE TABLE `wp_cs_topic` (\
+  `topic_key` int NOT NULL,\
+  `token` char(32) NOT NULL,\
+  `last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\
+  `referer` varchar(200) DEFAULT NULL,\
+  `topic_id` int NOT NULL,\
+  `topic_name` varchar(200) NOT NULL,\
+  `topic_slug` varchar(200) NOT NULL,\
+  `topic_status` varchar(20) NOT NULL,\
+  `topic_type` varchar(20) NOT NULL,\
+  `topic_search_1` text,\
+  `topic_search_2` text,\
+  `topic_exclude` text,\
+  `topic_sources` longtext,\
+  `topic_aidbfc` longtext,\
+  `topic_aidbcat` longtext,\
+  `topic_skip_domains` longtext,\
+  `topic_min_length` int DEFAULT NULL,\
+  `topic_cat` int DEFAULT NULL,\
+  `topic_tag` int DEFAULT NULL,\
+  `topic_tag_search2` char(1) DEFAULT NULL,\
+  `topic_options` text,\
+  PRIMARY KEY (topic_key),\
+  KEY token (token)\
+) \
+\
+The next two tables are only needed if you run the Cloud Server in Request Mode, which you won\'92t need for a single client of the Cloud Server.  In the MyCurator plugin on your site go to the Options menu, Admin tab and clear the option \'93Page Request Mode\'94 and then click Save Options.  You will not need these tables now.\
+\
+Request mode is an asynchronous mode where MyCurator queues up requests for articles and the server fills them.  Then MyCurator comes back and gets the articles later.  This is for a central Cloud Service for multiple sites.\
+\
+CREATE TABLE `wp_cs_cache` (\
+  `pr_id` bigint NOT NULL,\
+  `pr_url` varchar(1000) NOT NULL,\
+  `pr_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\
+  `pr_page_content` longtext,\
+  `pr_usage` int NOT NULL,\
+  `pr_rqst` int DEFAULT NULL,\
+  PRIMARY KEY (pr_id),\
+  KEY pr_url (pr_url)\
+)\
+\
+CREATE TABLE `wp_cs_requests` (\
+  `rq_id` bigint NOT NULL,\
+  `rq_url` varchar(1000) NOT NULL,\
+  `rq_errcnt` int DEFAULT NULL,\
+  `rq_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\
+  `rq_err_try` int DEFAULT NULL,\
+  `rq_dbkey` int DEFAULT NULL,\
+  PRIMARY KEY (rq_id),\
+  KEY rq_url (rq_url(255))\
+)\
+\
+The next table is for statistical data that is captured during a CRON process in the Admin plugin, tgtinfo-admin.  You can turn off the use of these tables by commenting out the CRON code in line 52-55 of the tgtinfo-admin.php program.\
+\
+CREATE TABLE `wp_cs_dailytot` (\
+  `last_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\
+  `day_total` int NOT NULL,\
+  `run_total` bigint NOT NULL,\
+  `cache_day` int DEFAULT NULL,\
+  `cache_run` int DEFAULT NULL,\
+  `rqst_day` int DEFAULT NULL,\
+  `rqst_run` int DEFAULT NULL,\
+  PRIMARY KEY lastdate\
+) \
+\
+\
+}
